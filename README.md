@@ -1,6 +1,6 @@
 # kong-docker-setup with your custom plugin
 
-1. Starting PostgreSql Db in the container.
+	1. Starting PostgreSql Db in the container.
 
 docker run -d --name kong-database \
 -p 5432:5432 \
@@ -10,7 +10,7 @@ docker run -d --name kong-database \
 -v /home/ec2-user/kong-files/postgres-data:/var/lib/postgresql/data \
 postgres:9.6
 
-2. Bootstrapping the Database
+	2. Bootstrapping the Database
 
 docker run --rm \
      -e "KONG_DATABASE=postgres" \
@@ -19,11 +19,11 @@ docker run --rm \
      -e "KONG_CASSANDRA_CONTACT_POINTS=172.17.0.2" \
      kong:latest kong migrations bootstrap
 
-3. Creating your Kong Image.
+	3. Creating your Kong Image.
 
 docker build -t kong:home ./
 
-4. Starting Kong in the container.
+	4. Starting Kong in the container.
 
 docker run -d --name kong-con \
      -e "KONG_DATABASE=postgres" \
@@ -51,9 +51,9 @@ docker run -d --name kong-con \
 	> I edited the image available on Docker Hub so that I can add the plugins.
   
 # Sources: 
-	Kong:latest image source: https://hub.docker.com/_/kong   \n
-	Kong:latest Dockerfile source:  https://github.com/Kong/dockerkong/blob/7c6281ca1906b05080af23c94fafa2ff08d05856/ubuntu/Dockerfile \n
-	fortress-http plugin: https://github.com/apifortress/fortress-http-log  \n
-	http-log-extended plugin: https://github.com/Makcy/kong-plugin-http-log-extended \n
+	Kong:latest image source: https://hub.docker.com/_/kong
+	Kong:latest Dockerfile source: 	https://github.com/Kong/dockerkong/blob/7c6281ca1906b05080af23c94fafa2ff08d05856/ubuntu/Dockerfile
+	fortress-http plugin: https://github.com/apifortress/fortress-http-log
+	http-log-extended plugin: https://github.com/Makcy/kong-plugin-http-log-extended
 
 
