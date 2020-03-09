@@ -1,4 +1,4 @@
-#---KONG---
+---KONG---
 
 1.Install kong as installable file in ubuntu
 
