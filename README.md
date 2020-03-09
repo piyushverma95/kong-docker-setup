@@ -45,9 +45,9 @@ docker run -d --name kong-con \
 > I edited the image available on Docker Hub so that I can add the plugins.
   
 # Sources: 
-  Kong:latest image source: https://hub.docker.com/_/kong
-	Kong:latest Dockerfile source:  https://github.com/Kong/docker-kong/blob/7c6281ca1906b05080af23c94fafa2ff08d05856/ubuntu/Dockerfile
-  fortress-http plugin: https://github.com/apifortress/fortress-http-log
-  http-log-extended plugin: https://github.com/Makcy/kong-plugin-http-log-extended
+Kong:latest image source: https://hub.docker.com/_/kong   \n
+Kong:latest Dockerfile source:  https://github.com/Kong/dockerkong/blob/7c6281ca1906b05080af23c94fafa2ff08d05856/ubuntu/Dockerfile \n
+fortress-http plugin: https://github.com/apifortress/fortress-http-log  \n
+http-log-extended plugin: https://github.com/Makcy/kong-plugin-http-log-extended \n
 
 
