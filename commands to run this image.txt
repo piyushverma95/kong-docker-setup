@@ -187,6 +187,14 @@ uris= path where you want to access your api using gateway url. eg: 34.227.75.24
 NOTE: I am running Kong gateway, my microservice in the same server.
 
 
+Important files:
+Kong Config file is located at /etc/kong/kong.conf or /etc/kong/kong.conf.default
+Directory where plugins are stored: /usr/local/share/lua/5.1/kong/plugins/
+Directory where rockspec file is located: /usr/local/lib/luarocks/rocks-5.1/2.0.1-0/kong-2.0.1-0.rockspec
+
+NOTE: depending on the Kong version, these folder names might change for rockspec file like, instead of rocks-5.1, it can be rocks
+ and instead of 2.0.1-0 it can be 0.14.1-0 for Kong 0.14.1 version.
+
 References:
 
 https://docs.konghq.com/0.13.x/admin-api/#service-object
