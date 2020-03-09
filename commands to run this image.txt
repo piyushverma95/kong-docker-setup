@@ -62,13 +62,20 @@ a. CREATE route
  OR
   -- curl -X POST http://localhost:8001/services/<service-name>/routes --data 'name=<route-name>'(optional) --data 'paths = /<pathname>'
 
-eg:
+egs:
 Request:
 $ curl -i -X POST \
   --url http://localhost:8001/services/example-service/routes \
   --data 'hosts[]=example.com'
   
-curl -X POST http://localhost:8001/services/first-service/routes --data 'hosts[]=18.212.215.245'
+$ curl -X POST http://localhost:8001/services/first-service/routes --data 'hosts[]=18.212.215.245'
+
+$ curl -i -X POST http://localhost:8001/routes/ \
+    -d 'hosts[]=example.com' \
+    -d 'paths[]=/foo' \
+    -d 'service.id=96bbfafe-6b6b-4027-855a-75e12de0aae8'
+	
+	
 	
 Response:
 HTTP/1.1 201 Created
@@ -142,13 +149,19 @@ e.PUT for updating existing route details
    c. find for kong-***.***.rockspec file (possibly under /usr/local/lib/luarocks/rocks/kong/0.14.1-0/ and update as below, make sure you have luarocks installed
       ["kong.plugins.<custom-plugin-name>.handler"] = "kong/plugins/<custom-plugin-name>/handler.lua",
       ["kong.plugins.<custom-plugin-name>.schema"] = "kong/plugins/<custom-plugin-name>/schema.lua",
+     ["kong.plugins.<custom-plugin-name.serializer.lua"] = "kong/plugins/<custom-plugin-name>/serializer.lua",   [if this file is avialble in your custom plugin]
+	  
+	  eg: 
+    ["kong.plugins.http-log-extended.handler"] = "kong/plugins/http-log-extended/handler.lua",
+    ["kong.plugins.http-log-extended.schema"] = "kong/plugins/http-log-extended/schema.lua",
+    ["kong.plugins.http-log-extended.serializer"] = "kong/plugins/http-log-extended/serializer.lua",
 	  
 	  
    d.edit kong.conf file and update as below
      plugins = bundled, <custom-plugin-name>
 
    e. kong prepare
-   f. kong reload/kong restart
+   f. kong reload/kong restart or kong stop and then kong start.
 
 -- Verfiy custom-plugin is enabled in kong platform
    -- curl -X GET http://localhost:8001/plugins/enabled
@@ -163,6 +176,16 @@ eg:
 $ curl -i -X GET \
   --url http://localhost:8000/ \
   --header 'Host: example.com'
+
+8. Creating an API.
+ 
+ curl -i -X POST http://localhost:8001/apis/ --data 'name=userapi' --data 'hosts=34.227.75.24:8080/user' --data 'uris=/newuser' --data 'upstream_url=http://localhost:8080/user'
+
+upstream_url = endpoint to access your microservice is running. eg: 34.227.75.24:8080/user
+uris= path where you want to access your api using gateway url. eg: 34.227.75.24:8000/newuser
+
+NOTE: I am running Kong gateway, my microservice in the same server.
+
 
 References:
 
